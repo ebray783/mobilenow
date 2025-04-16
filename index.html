@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FPVTOKEN</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+      background: linear-gradient(to bottom, #0a0220, #120447);
+      background-attachment: fixed;
+      color: white;
+      font-family: 'Orbitron', sans-serif;
+      text-align: center;
+      overflow-x: hidden;
+      padding-top: 90px;
+    }
+
+    .topbar {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 10px 20px;
+      position: fixed;
+      top: 0;
+      z-index: 999;
+      box-sizing: border-box;
+      backdrop-filter: blur(8px);
+      transition: top 0.3s ease-in-out;
+    }
+
+    .nav-buttons {
+  flex-wrap: nowrap;
+  flex-direction: row;
+  overflow-x: auto;
+}
+
+
+    .nav-buttons button {
+      background: transparent;
+      border: 2px solid #00f0ff;
+      color: #00f0ff;
+      padding: 6px 14px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 10px;
+      margin: 5px;
+    }
+
+    .nav-buttons button:hover {
+      background-color: #00f0ff;
+      color: #0a0220;
+    }
+
+    .search-bar {
+      margin-top: 10px;
+    }
+
+    .search-bar input {
+      padding: 5px;
+      font-size: 16px;
+      width: 200px;
+      max-width: 100%;
+      border: 2px solid #00f0ff;
+      border-radius: 8px;
+      background: transparent;
+      color: #00f0ff;
+    }
+
+@media (max-width: 768px) {
+  .topbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .search-bar {
+    order: -1;
+    margin-top: 0;
+    text-align: center;
+  }
+  .nav-buttons {
+    flex-wrap: nowrap;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+}
+
+    }
+
+    #logo {
+      width: 90%;
+      max-width: 500px;
+      height: auto;
+      animation: pulse 3s infinite;
+      margin-top: 20px;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.9; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #00f0ff;
+      margin: 30px 0 20px 0;
+    }
+
+    .description {
+      font-size: 1rem;
+      max-width: 90%;
+      margin: 0 auto 10px auto;
+      line-height: 1.5;
+    }
+
+    .button-group {
+      margin: 30px 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .button-group button {
+      background: transparent;
+      border: 2px solid #00f0ff;
+      color: #00f0ff;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border-radius: 10px;
+      margin: 10px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      color: #00f0ff;
+      margin-top: 80px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      padding: 40px 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 3px solid #00f0ff;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #22409A, 0 0 10px #22409A;
+    }
+
+    #mint-section {
+      margin-top: 100px;
+    }
+
+    .mint-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px;
+    }
+
+    .mint-item {
+      text-align: center;
+      max-width: 200px;
+    }
+
+    .mint-item img {
+      width: 100%;
+      height: auto;
+      max-height: 150px;
+      border: 2px solid #00f0ff;
+      border-radius: 10px;
+    }
+
+    .mint-item button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 8px;
+      background: transparent;
+      border: 2px solid #00f0ff;
+      color: #00f0ff;
+      cursor: pointer;
+    }
+
+    .section {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 40px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar" id="topbar">
+    <div class="search-bar">
+      <input type="text" placeholder="Search...">
+    </div>
+    <div class="nav-buttons">
+      <button onclick="scrollToSection('top')">Home</button>
+      <button onclick="scrollToSection('gallery')">Gallery</button>
+      <button onclick="scrollToSection('mint-section')">Mint</button>
+      <button onclick="scrollToSection('contact')">Contact</button>
+    </div>
+  </div>
+
+  <div id="top"></div>
+  <img id="logo" src="logo.jpg" alt="Logo" />
+
+  <h1>FPVTOKEN</h1>
+  <p class="description">
+    The first crypto token inspired by aliens Predator idea,<br />
+    Including real FPV drone parts & NFT collection
+  </p>
+
+  <div class="button-group">
+    <button>Buy</button>
+    <button>Sell</button>
+  </div>
+
+  <h2 class="section-title">About the Project</h2>
+  <p class="description">
+    FPVTOKEN is the first crypto project merging FPV drone parts & NFTs.<br />
+    Inspired by alien Predator themes, our mission is dimming at technology and FPV facing, into one dimining, ecosystem.
+  </p>
+
+  <h2 id="gallery" class="section-title">GALLERY</h2>
+  <div class="gallery">
+    <img src="img1.jpg" alt="">
+    <img src="img2.jpg" alt="">
+    <img src="img3.jpg" alt="">
+    <img src="img4.jpg" alt="">
+    <img src="img5.jpg" alt="">
+    <img src="img6.jpg" alt="">
+    <img src="img7.jpg" alt="">
+    <img src="img8.jpg" alt="">
+  </div>
+
+  <div id="mint-section" class="section">
+    <h2 class="section-title">SMART CONTRACT</h2>
+    <p class="description">Your minting section and smart contract interaction will go here.</p>
+  </div>
+
+  <script>
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Hide/Show Topbar on Scroll
+    let lastScrollTop = 0;
+    const topbar = document.getElementById("topbar");
+
+    window.addEventListener("scroll", function () {
+      let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      if (currentScroll > lastScrollTop) {
+        topbar.style.top = "-100px"; // Hide when scrolling down
+      } else {
+        topbar.style.top = "0"; // Show when scrolling up
+      }
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    }, false);
+  </script>
+</body>
+</html>
