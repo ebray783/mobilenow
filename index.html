@@ -157,13 +157,13 @@
       margin-top: 80px;
     }
 
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 20px;
-      padding: 40px 20px;
-      justify-content: center; /* ✅ NEW: Center last row */
-    }
+   .gallery {
+  display: flex; /* ✅ Changed from grid to flex */
+  flex-wrap: wrap;
+  justify-content: center; /* ✅ Center items in each row */
+  gap: 20px;
+  padding: 40px 20px;
+}
 
     .gallery img {
       width: 100%;
