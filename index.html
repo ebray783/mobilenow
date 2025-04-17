@@ -87,13 +87,12 @@
       background: transparent;
       color: #00f0ff;
     }
+@media (max-width: 500px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr); /* ✅ Always 2 per row on mobile */
+  }
+}
 
-    @media (max-width: 768px) {
-      .topbar {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-      }
 
       .search-bar {
         order: -1;
@@ -159,11 +158,11 @@
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  max-width: 800px; /* ✅ Limit max width to center grid */
+  margin: 0 auto;   /* ✅ Center the entire grid */
   gap: 20px;
   padding: 40px 20px;
-  place-items: center; /* ✅ This centers grid items */
-  grid-auto-flow: row dense; /* ✅ Helps reduce gaps */
 }
 
 
