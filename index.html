@@ -157,13 +157,15 @@
       margin-top: 80px;
     }
 
-   .gallery {
-  display: flex; /* ✅ Changed from grid to flex */
-  flex-wrap: wrap;
-  justify-content: center; /* ✅ Center items in each row */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 20px;
   padding: 40px 20px;
+  place-items: center; /* ✅ This centers grid items */
+  grid-auto-flow: row dense; /* ✅ Helps reduce gaps */
 }
+
 
     .gallery img {
       width: 100%;
